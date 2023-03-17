@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Purchase Form</title>
+    <script src="scripts/formExampleLO5.js"></script>
+    <link rel="stylesheet" href="styles/form.css"/>
+</head>
+<body>
+  <form name="carPurchaseForm" id="carPurchaseFormID" action="formSubmissionLO5.html" method="post">
+    <label for="nameInputID">Customer Name: </label>
+    <input type="text" name="nameInput" id="nameInputID" value="default name" placeholder="Type your name" />
+    <br>
+    <label for="dobInputID">Customer DOB: </label>
+    <input type="date" name="dobInput" id="dobInputID" placeholder="Type your DOB" />
+    <br>
+    <label for="ageInputID">Age: </label>
+    <input type="number" name="ageInput" id="ageInputID" placeholder="Type your Age" min="0" max="100" value="0"/>
+    <br>
+    <input type="submit" name="submitInput" value="Submit"/>
+    <input type="reset" name="resetInput" value="Submit"/>
+  </form>
+</body>
+
+<!--      URL(get) -> lo5/formSubmissionLO5.html?nameInput=testName&ageInput=5-->
+<!--request Payload (post) -> nameInput=default+name&ageInput=0-->
+<!--key: name of input element-->
+<!--value:  value of input  element-->
+<!--example:-->
+<!--nameInput: testName-->
+<!--ageInput: 5-->
+</html>
+

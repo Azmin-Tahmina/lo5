@@ -8,7 +8,7 @@
 
     <body>
         <form name="simpleForm" id="simpleFormID"
-		      action="aformprocessor.html" method="get">
+		      action="aformprocessor.html" method="post">
             <fieldset>
                 <legend>T-shirt ordering form</legend>
 
@@ -45,6 +45,10 @@
                     <input type="reset" value="Reset Form" />
                 </span>
             </fieldset>
+<!--            aformprocessor.html?name=Test&size=S&colour=G&forChild=yes-->
+<!--            uncheck radio: aformprocessor.html?name=Test&size=S&colour=G-->
+<!--            payload for post:  name=teatName&size=S&colour=R&forChild=yes-->
+<!--            uncheck radio: name=teatName&size=S&colour=R-->
         </form>
     </body>
 </html>
