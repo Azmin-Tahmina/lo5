@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>jQuery Form Validation</title>
+        <link rel="stylesheet" href="styles/jform.css" />
+        <script src="scripts/jquery-3.4.1.min.js"></script>
+        <script src="scripts/jquery.validate.min.js"></script>
+        <!--<script src="scripts/additional-methods.min.js"></script>-->
+        <script src="scripts/pattern.js"></script>
+        <script>
+            jQuery.validator.addMethod("nameChars", function(value, elem) {
+                return this.optional(elem) || /^[A-Za-z0-9]+$/.test(value);
+            }, "A name can only contain letters or numbers");
+
+
+            jQuery.validator.addMethod("passwordChars", function(value, elem) {
+                let result = true;
+                if (! /[A-Z]/.test(value)) {
+                    result = false;
+                }
+                if (! /[a-z]/.test(value)) {
+                    result = false;
+                }
+                if (! /[0-9]/.test(value)) {
+                    result = false;
+                }
+                return this.optional(elem) || result;
+            }, "Password must have at least one of lowercase, uppercase, and digits");
+
+
+            $(document).ready(function() {
+                $("#testForm").validate({
+                    rules: {
+                        name: {
+                            required: true,
+                            minlength: 2,
+                            // nameChars: true
+                        },
+                        age: {
+                            required: true,
+                            digits: true
+                        },
+                        cstID: {
+                            pattern: /^[Cc][Ss][Tt]\d{3}$/
+                        },
+                        "confirm-password": {
+                            equalTo: "#new-password"
+                        },
+                        "new-password": {
+                            passwordChars: true
+                        }
+                    },
+                    messages: {
+                        name: {
+                            required: "Please enter a name"
+                        },
+                        email: {
+                            required: "This must be an email address"
+                        },
+                        age: {
+                            required: "You must specify an age",
+                            digits: "Age must be a nonnegative number"
+                        },
+                        cstID: {
+                            pattern: "Must be in the form cst### where # is a digit"
+                        }
+                    }
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+        <form id="testForm" action="aformprocessor.html" method="get">
+            <fieldset>
+                <legend>CST Information Form</legend>
+                
+                <p>
+                    <label for="name">Name</label>
+                    <em>*</em>
+                    <input id="name" name="name" type="text" size="30" maxlength="30" required />
+                </p>
+
+                <p>
+                    <label for="cstID">CST ID</label>
+                    <em>*</em>
+                    <input id="cstID" name="cstID" type="text" size="6" maxlength="6" required />
+                            <!--pattern="^[Cc][Ss][Tt]\d{3}$" -->
+                </p>
+
+                <p>
+                    <label for="email">Email</label>
+                    <em>*</em>
+                    <input id="email" name="email" type="email" size="30" maxlength="30" required />
+                </p>
+
+                <p>
+                    <label for="age">Age</label>
+                    <em>*</em>
+                    <input id="age" name="age" type="number" class="digits" size="3" maxlength="3" />
+                </p>
+
+                <p>
+                    <label for="homepage">Homepage</label>
+                    <em>&nbsp;</em>
+                    <input id="homepage" name="homepage" type="url" size="50" maxlength="50" />
+                </p>
+
+                <p>
+                    <label for="new-password">Password</label>
+                    <em>&nbsp;</em>
+                    <input id="new-password" name="new-password" type="password" minlength="8" />
+                </p>
+
+                <p>
+                    <label for="confirm-password">Confirm</label>
+                    <em>&nbsp;</em>
+                    <input id="confirm-password" name="confirm-password" type="password" />
+                </p>
+
+                <p>
+                    <input type="submit" value="Submit Info" />
+                    <input type="reset" value="Reset Form" />
+                </p>
+            </fieldset>
+        </form>
+    </body>
+</html>
