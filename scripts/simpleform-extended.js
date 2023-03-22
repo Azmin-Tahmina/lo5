@@ -21,6 +21,8 @@ function handleSubmission(event) {
     let selectedOption;
 
     currentElement = document.getElementById("name");
+    // currentElement = $("#name").val();
+
     outputString += "Current value of the name text input: " + currentElement.value + "\n";
     outputString += "Default value of the name text input: " + currentElement.defaultValue + "\n";
 

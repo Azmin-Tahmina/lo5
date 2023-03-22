@@ -44,3 +44,12 @@ fieldset {
 .errorMessage {
 	color: red;
 }
+
+table, th,tr,td {
+
+	border: solid 1px;
+	border-collapse: collapse;
+	column-width: 90px;
+	text-align: center;
+	text-decoration-color: lightcoral ;
+}

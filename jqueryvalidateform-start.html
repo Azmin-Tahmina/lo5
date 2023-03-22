@@ -4,7 +4,38 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>jQuery Form Validation</title>
         <link rel="stylesheet" href="styles/jform.css" />
+        <script src="scripts/jquery-3.4.1.min.js"></script>
+        <script src="scripts/jquery.validate.min.js"></script>
+        <script>
+            $(function (){
+                $("#testForm").validate({
+                    rules:{
+                        name:{
+                            required: true,
+                            minlength: 2
+                        },
+                        cstID:{
+                            required: true,
+                            minlength:1
+                        }
+
+                    },
+                    messages:{
+                        name:{
+                            required: "Please enter a name",
+                            minlength: "Minimum length can be 2"
+                        },
+                        cstID: {
+                            required: "Please enter a CSTID",
+                            minlength: "Minimum length can be 1"
+                        }
+
+                    }
+                });
+            });
+        </script>
     </head>
+
 
     <body>
         <form id="testForm" action="aformprocessor.html" method="get">
@@ -20,26 +51,26 @@
                 <p>
                     <label for="cstID">CST ID</label>
                     <em>*</em>
-                    <input id="cstID" name="cstID" type="text" size="6" maxlength="6"  />
+                    <input id="cstID" name="cstID" type="text" size="6" maxlength="6" />
                             <!--pattern="^[Cc][Ss][Tt]\d{3}$" -->
                 </p>
 
                 <p>
                     <label for="email">Email</label>
                     <em>*</em>
-                    <input id="email" name="email" type="text" size="30" maxlength="30" />
+                    <input id="email" name="email" type="email" size="30" maxlength="30" required/>
                 </p>
 
                 <p>
                     <label for="age">Age</label>
                     <em>*</em>
-                    <input id="age" name="age" type="text" size="3" maxlength="3" />
+                    <input id="age" name="age" type="number" class="digits" size="3" maxlength="3" required/>
                 </p>
 
                 <p>
                     <label for="homepage">Homepage</label>
                     <em>&nbsp;</em>
-                    <input id="homepage" name="homepage" type="text" size="50" maxlength="50" />
+                    <input id="homepage" name="homepage" type="url" size="50" maxlength="50" />
                 </p>
 
                 <p>

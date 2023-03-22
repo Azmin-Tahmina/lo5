@@ -16,9 +16,9 @@ function init() {
 }
 
 function handleSubmission(event) {
+    // handleName();
     event.preventDefault();
 
-    handleName();
 }
 
 function handleName() {

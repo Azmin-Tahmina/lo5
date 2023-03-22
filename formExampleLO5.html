@@ -3,23 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <title>Car Purchase Form</title>
+    <script src="scripts/jquery-3.4.1.min.js"></script>
+    <script src="scripts/jquery.validate.min.js"></script>
     <script src="scripts/formExampleLO5.js"></script>
     <link rel="stylesheet" href="styles/form.css"/>
 </head>
 <body>
   <form name="carPurchaseForm" id="carPurchaseFormID" action="formSubmissionLO5.html" method="post">
-    <label for="nameInputID">Customer Name: </label>
-    <input type="text" name="nameInput" id="nameInputID" value="default name" placeholder="Type your name" />
-    <br>
-    <label for="dobInputID">Customer DOB: </label>
-    <input type="date" name="dobInput" id="dobInputID" placeholder="Type your DOB" />
-    <br>
-    <label for="ageInputID">Age: </label>
-    <input type="number" name="ageInput" id="ageInputID" placeholder="Type your Age" min="0" max="100" value="0"/>
-    <br>
-    <input type="submit" name="submitInput" value="Submit"/>
-    <input type="reset" name="resetInput" value="Submit"/>
+      <fieldset>
+          <legend>Car Ordering Form</legend>
+          <label class="leftcol" for="nameInputID">Customer Name: </label>
+          <input class="rightcol" type="text" name="nameInput" id="nameInputID" value="default name" placeholder="Type your name"/>
+          <br>
+          <label class="leftcol"  for="dobInputID" required>Customer DOB: </label>
+          <input class="rightcol" type="date" name="dobInput" id="dobInputID" placeholder="Type your DOB" />
+          <br>
+          <label class="leftcol" for="ageInputID" required>Age: </label>
+          <input class="rightcol" type="number" name="ageInput" id="ageInputID" placeholder="Type your Age" min="0" max="100" value="0"/>
+<!--          onchange="checkAge();"-->
+          <br>
+          <label class="leftcol" for="companyInputID">Type: </label>
+          <select class="rightcol" name="companyInput" id="companyInputID" >
+<!--              onchange="changeCarModels(this.value);"-->
+              <option value="" selected>Select</option>
+              <option value="Toyota">Toyota</option>
+              <option value="Honda">Honda</option>
+              <option value="Audi">Audi</option>
+              <option value="Acura">Acura</option>
+              <option value="BMW">BMW</option>
+          </select>
+          <label class="leftcol" for="carModelInputID" id="carModelInputIDLabel">Available Models: </label>
+          <select class="rightcol" name="carModelInput" id="carModelInputID">
+          </select>
+
+          <span class="leftcol">Colour:</span>
+          <span class="rightcol ">
+              <input type="radio" id="colourRedID" name="colourInput" value="R" />
+              <label for="colourRedID">Red</label>
+              <input type="radio" id="colourGreenID" name="colourInput" value="G" checked="checked"  />
+              <label for="colourGreenID">Green</label>
+              <input type="radio" id="colourBlueID" name="colourInput" value="B" />
+              <label for="colourBlueID">Blue</label>
+          </span>
+
+          <span class="rightcol ">
+              <label  for="priceNegotiatedID">Negotiated Price?</label>
+              <input  type="checkbox" id="priceNegotiatedID" name="priceNegotiatedInput" value="yes" />
+          </span>
+
+          <span class="buttons">
+            <input type="submit" value="Place Order" />
+            <input type="reset" value="Reset Form" />
+          </span>
+
+      </fieldset>
+
   </form>
+  <div id="showInformation" >
+      <table id="showInformationTable">
+          <thead>
+            <tr>
+                <th>Customer name</th>
+                <th>Customer DOB</th>
+                <th>Customer name</th>
+                <th>Customer DOB</th>
+                <th>Customer name</th>
+                <th>Customer DOB</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+          <tfoot>
+
+          </tfoot>
+      </table>
+
+  </div>
 </body>
 
 <!--      URL(get) -> lo5/formSubmissionLO5.html?nameInput=testName&ageInput=5-->
