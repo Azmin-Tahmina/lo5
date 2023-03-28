@@ -12,6 +12,7 @@ window.onload = init;
 
 function init() {
     document.getElementById("simpleFormID").onsubmit = handleSubmission;
+
 }
 
 function handleSubmission(event) {

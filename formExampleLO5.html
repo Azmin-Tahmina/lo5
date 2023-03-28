@@ -5,15 +5,18 @@
     <title>Car Purchase Form</title>
     <script src="scripts/jquery-3.4.1.min.js"></script>
     <script src="scripts/jquery.validate.min.js"></script>
+    <script src="scripts/additional-methods.min.js"></script>
     <script src="scripts/formExampleLO5.js"></script>
+<!--    <link rel="stylesheet" href="styles/form.css"/>-->
     <link rel="stylesheet" href="styles/form.css"/>
+
 </head>
 <body>
   <form name="carPurchaseForm" id="carPurchaseFormID" action="formSubmissionLO5.html" method="post">
       <fieldset>
           <legend>Car Ordering Form</legend>
           <label class="leftcol" for="nameInputID">Customer Name: </label>
-          <input class="rightcol" type="text" name="nameInput" id="nameInputID" value="default name" placeholder="Type your name"/>
+          <input class="rightcol" type="text" name="nameInput" id="nameInputID" value="default name" placeholder="Type your name" pattern="/[a-Z]/"/>
           <br>
           <label class="leftcol"  for="dobInputID" required>Customer DOB: </label>
           <input class="rightcol" type="date" name="dobInput" id="dobInputID" placeholder="Type your DOB" />
@@ -23,8 +26,8 @@
 <!--          onchange="checkAge();"-->
           <br>
           <label class="leftcol" for="companyInputID">Type: </label>
-          <select class="rightcol" name="companyInput" id="companyInputID" >
-<!--              onchange="changeCarModels(this.value);"-->
+          <select class="rightcol" name="companyInput" id="companyInputID"  onchange="changeCarModels(this.value);">
+
               <option value="" selected>Select</option>
               <option value="Toyota">Toyota</option>
               <option value="Honda">Honda</option>
@@ -32,6 +35,8 @@
               <option value="Acura">Acura</option>
               <option value="BMW">BMW</option>
           </select>
+
+
           <label class="leftcol" for="carModelInputID" id="carModelInputIDLabel">Available Models: </label>
           <select class="rightcol" name="carModelInput" id="carModelInputID">
           </select>

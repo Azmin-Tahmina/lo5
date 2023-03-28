@@ -13,11 +13,14 @@ window.onload = init;
 function init() {
     document.getElementById("simpleFormID").onsubmit = handleSubmission;
     document.getElementById("name").oninput = handleName;
+    // document.getElementById("name").onblur = handleName;
 }
 
 function handleSubmission(event) {
-    // handleName();
+
+    handleName();
     event.preventDefault();
+
 
 }
 

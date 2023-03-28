@@ -6,33 +6,133 @@
         <link rel="stylesheet" href="styles/jform.css" />
         <script src="scripts/jquery-3.4.1.min.js"></script>
         <script src="scripts/jquery.validate.min.js"></script>
+        <script src="scripts/additional-methods.min.js"></script>
         <script>
+            jQuery.validator.addMethod( "nameChars", nameTester,"A name can only contain letters" );
+            jQuery.validator.addMethod( "validateCST", cstValidationFunction,"Please Enter a Valid CST ID" );
+            jQuery.validator.addMethod( "PasswordChecker", PasswordCheckerFunction,"Please Enter a Valid Password" );
+
+
+            function nameTester(value,element)
+            {
+                return this.optional(element)|| /^[A-Za-z]+$/.test(value);
+            }
+
+            function cstValidationFunction(value,element)
+            {
+                let result =  /^[Cc][Ss][Tt]\d{3}$/.test(value);
+                return this.optional(element)|| result;
+            }
+            // /^[Cc][Ss][Tt]\d{3}$/.test(value)
+
+            function PasswordCheckerFunction(value,element)
+            {
+                let result = true;
+
+                if (! /[A-Z]/.test(value)) {
+                    result = false;
+                }
+                if (! /[a-z]/.test(value)) {
+                    result = false;
+                }
+                if (! /[0-9]/.test(value)) {
+                    result = false;
+                }
+                //
+                // return this.optional(element) || result;
+                // return this.optional(element) || result;
+            }
+
+
             $(function (){
-                $("#testForm").validate({
-                    rules:{
-                        name:{
-                            required: true,
-                            minlength: 2
-                        },
-                        cstID:{
-                            required: true,
-                            minlength:1
-                        }
+                $("#testForm").validate(
+                    {
+                        rules:{
+                            name:{
+                                required: true,
+                                nameChars: true,
+                                minlength: 2,
+                                maxlength: 4
+                            },
+                            cstID:{
+                                required:true,
+                                pattern: /^[Cc][Ss][Tt]\d{3}$/,
+                                validateCST: true,
+                                maxlength: 6
+                                //regular expression check;
+                            },
+                            age:{
+                                required:true,
+                                maxlength: 2
+                            },
+                            "confirm-password":{
+                                equalTo: "#newpassword"
+                            },
+                            "new-password":{
+                                //regular expression check;
+                                PasswordChecker: true
+                            }
 
-                    },
-                    messages:{
-                        name:{
-                            required: "Please enter a name",
-                            minlength: "Minimum length can be 2"
                         },
-                        cstID: {
-                            required: "Please enter a CSTID",
-                            minlength: "Minimum length can be 1"
-                        }
+                        messages:{
+                            name:{
+                                required: "Please enter a name",
+                                minlength: "Maximum length can be 4",
+                                maxlength: "Minimum length can be 2",
+                            },
+                            cstID:{
+                                required: "Please enter a CSTID",
+                                pattern: "Please enter valid CST ID",
+                                maxlength: "Minimum length can be 6"
+                            },
+                            age:{
+                                required: "Please enter your age",
+                                maxlength: "Minimum length can be 2"
+                            },
+                            "confirm-password":{
+                                equalTo: "Password did not match."
+                            }
 
-                    }
-                });
+
+                        },
+                        submitHandler: formHandler
+
+                    });
             });
+
+            function formHandler(event)
+            {
+                event.preventDefault();
+                // checkName();
+                // checkAge();
+                // saveCarInfo();
+                // showTables();
+            }
+
+            // {
+            //     rules:{
+            //         name:{
+            //             required: true,
+            //                 minlength: 2
+            //         },
+            //         cstID:{
+            //             required: true,
+            //                 minlength:1
+            //         }
+            //
+            //     },
+            //     messages:{
+            //         name:{
+            //             required: "Please enter a name",
+            //                 minlength: "Minimum length can be 2"
+            //         },
+            //         cstID: {
+            //             required: "Please enter a CSTID",
+            //                 minlength: "Minimum length can be 1"
+            //         }
+            //
+            //     }
+            // }
         </script>
     </head>
 
@@ -58,13 +158,13 @@
                 <p>
                     <label for="email">Email</label>
                     <em>*</em>
-                    <input id="email" name="email" type="email" size="30" maxlength="30" required/>
+                    <input id="email" name="email" type="email" size="30" maxlength="30" />
                 </p>
 
                 <p>
                     <label for="age">Age</label>
                     <em>*</em>
-                    <input id="age" name="age" type="number" class="digits" size="3" maxlength="3" required/>
+                    <input id="age" name="age" type="number" class="digits" size="3" maxlength="3"/>
                 </p>
 
                 <p>
