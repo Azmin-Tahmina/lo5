@@ -15,18 +15,85 @@ let colorMapping = {"R":"Red","G":"Green","B":"Blue"}
 let customerInfo = [];
 
 
-window.onload = init;
+// window.onload = init;
+//
+// function init()
+// {
+//     $("#carModelInputIDLabel").hide();
+//     $("#carModelInputID").hide();
+//     $("#showInformationTable").hide();
+//     document.getElementById("carPurchaseFormID").onsubmit = formSubmitEventHandler;
+//     document.getElementById("nameInputID").onchange = checkName;
+//     document.getElementById("ageInputID").onchange = checkAge;
+// }
 
-function init()
+jQuery.validator.addMethod( "validateAge", checkAge,"Please Enter Correct Age" );
+
+function checkAge(value,element)
 {
+    let dateAgeMatched = true;
+    let dob = new Date($("#dobInputID").val());
+    let now = new Date();
+    let dobInYear = dob.getFullYear();
+    let currentYear = now.getFullYear();
+    let ageInYear = currentYear - dobInYear;
+    let age = value;
+    if(Number(age) !== ageInYear)
+    {
+        $("#ageInputID").val(0);
+        dateAgeMatched = false;
+    }
+    return this.optional(element)||dateAgeMatched;
+}
+
+$(document).ready(function() {
     $("#carModelInputIDLabel").hide();
     $("#carModelInputID").hide();
     $("#showInformationTable").hide();
-    document.getElementById("carPurchaseFormID").onsubmit = formSubmitEventHandler;
-    document.getElementById("nameInputID").onchange = checkName;
-    document.getElementById("ageInputID").onchange = checkAge;
-}
 
+
+    $("#carPurchaseFormID").validate({
+        rules: {
+            nameInput: {
+                required: true,
+                minlength: 2,
+                maxlength:10,
+                pattern: /[A-Z]+[a-z]+/
+            },
+            dobInput: {
+                required: true,
+                date: true,
+                //maxDate: new Date()
+            },
+            ageInput: {
+                required: true,
+                min: 1,
+                max: 90,
+                digits: true,
+                validateAge: true
+            }
+        },
+        messages: {
+            nameInput: {
+                required: "Please enter a name",
+                minlength: "Please enter a valid name with at least 2 characters",
+                maxlength: "Please enter a valid name within 10 characters",
+                pattern: 'Your name should contain al least one uppercase and one lowercase letter'
+            },
+            dobInput: {
+                required: "Please enter a date, it's required",
+                date: "Please enter a valid date"
+            },
+            ageInput: {
+                required: "Please enter your age",
+                min: "Minimum age should be 18",
+                max: "Maximum age should be 90",
+                digits: "Age must be a non-negative number"
+            }
+        },
+        submitHandler: formSubmitEventHandler
+    });
+});
 
 function formSubmitEventHandler(event){
 
@@ -185,49 +252,25 @@ function changeCarModels(carCompany)
     }
 }
 
-function checkName()
-{
-    let name = $("#nameInputID").val();
-    if(name === "" || name===" ")
-    {
-        alert("Name cannot be empty")
-    }
-}
+// function checkName()
+// {
+//     let name = $("#nameInputID").val();
+//     if(name === "" || name===" ")
+//     {
+//         alert("Name cannot be empty")
+//     }
+// }
 
-function checkDOB()
-{
-    let dob = $("#dobInputID").val();
-    // alert(dob);
-    if(dob === "" || dob===" ")
-    {
-        alert("DOB cannot be empty")
-    }
+// function checkDOB()
+// {
+//     let dob = $("#dobInputID").val();
+//     // alert(dob);
+//     if(dob === "" || dob===" ")
+//     {
+//         alert("DOB cannot be empty")
+//     }
+//
+//     //user cannot give input which will exceed today's date
+//     //restrict user age based on DOB
+// }
 
-    //user cannot give input which will exceed today's date
-    //restrict user age based on DOB
-}
-
-function checkAge()
-{
-    let dob = new Date($("#dobInputID").val());
-    let now = new Date();
-    let dobInYear = dob.getFullYear();
-    // alert(dobInYear);
-    let currentYear = now.getFullYear();
-    // alert(currentYear);
-    let ageInYear = currentYear - dobInYear;
-    // alert(ageInYear);
-    let age = $("#ageInputID").val();
-    if(age === "" || age===" ")
-    {
-        alert("Age cannot be empty")
-    }
-    else
-    {
-        if(Number(age) !== ageInYear)
-        {
-            alert('Enter Correct Age');
-            $("#ageInputID").val(0);
-        }
-    }
-}
