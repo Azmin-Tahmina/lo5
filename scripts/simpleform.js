@@ -12,6 +12,8 @@ window.onload = init;
 
 function init() {
     document.getElementById("simpleFormID").onsubmit = handleSubmission;
+    //document.getElementById("simpleFormID").addEventListener("submit",handleSubmission)
+
 
 }
 

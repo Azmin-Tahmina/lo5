@@ -32,6 +32,7 @@ jQuery.validator.addMethod( "validateAge", checkAge,"Please Enter Correct Age." 
 
 function checkAge(value,element)
 {
+    // /^[Cc][Uu][Ss][Tt]\d{4}$/i.test("cust1234") example
     let age = value;
     let greaterThan18 = true;
     if(Number(age) < 18)
@@ -69,7 +70,8 @@ $(document).ready(function() {
                 required: true
             },
             customerIDInput:{
-                required: true
+                required: true,
+                pattern: /^[Cc][Uu][Ss][Tt]\d{4}$/i
             }
         },
         messages: {
@@ -77,7 +79,7 @@ $(document).ready(function() {
                 required: "Please enter a name",
                 minlength: "Please enter a valid name with at least 2 characters",
                 maxlength: "Please enter a valid name within 10 characters",
-                pattern: 'Your name should contain al least one uppercase and one lowercase letter'
+                pattern: 'Your name should contain at least one uppercase and one lowercase letter'
             },
             ageInput: {
                 required: "Please enter your age",
@@ -86,24 +88,39 @@ $(document).ready(function() {
                 digits: "Age must be a non-negative number",
                 validateAge: "Age cannot be less than 18"
             },
-            emailInput:{
+            emailInput: {
                 required: "Please enter a valid email "
-            },
-            customerIDInput:{
-                required: "Please enter valid Customer ID"
-            },
 
+            },
+            customerIDInput: {
+                required: "Please enter valid Customer ID",
+                pattern: "Please follow the format cust####"
+            },
 
         }
+        // },
+        // submitHandler: formHandler
     });
 
+    // form-submit event handler
     $("#carPurchaseFormID").submit(function(event){
         event.preventDefault();
         saveCarInfo();
         showTables();
     });
 
+
+
+
 });
+
+// function formHandler(event)
+// {
+//     event.preventDefault();
+//     saveCarInfo();
+//     showTables();
+// }
+
 
 function changeCarModels()
 {
